@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Map;
 
 import static pl.aszul.Task4Page16.Config.LINE_PATTERN;
 import static pl.aszul.Task4Page16.Config.RED;
@@ -58,8 +59,20 @@ public class Task4 {
                 years.getMax().getKey().getYear(), years.getMax().getValue(),
                 years.getMin().getKey().getYear(), years.getMin().getValue());
 
-        System.out.printf("4. Best month in all history : %d/%d [%d passengers], worst month in all history : %d/%d [%d passengers]",
+        System.out.printf("4. Best month in all history : %d/%d [%d passengers], worst month in all history : %d/%d [%d passengers]\n",
             months.getMax().getKey().getYear(), months.getMax().getKey().getMonthValue(), months.getMax().getValue(),
             months.getMin().getKey().getYear(), months.getMax().getKey().getMonthValue(), months.getMin().getValue());
+
+        System.out.println("5. Year to year relative passengers change:");
+        years.getSummaryChronologically();
+        int prevYearPassengers = 0;
+        int year2YearRatio;
+        for (Map.Entry<LocalDate, Integer> year : years.getSummaryChronologically()) {
+            if (prevYearPassengers != 0){
+                year2YearRatio = 100 * (year.getValue() - prevYearPassengers) / prevYearPassengers;
+                System.out.printf("%d %s%%\n", year.getKey().getYear(), year2YearRatio > 0 ? "+" + year2YearRatio : year2YearRatio);
+            }
+            prevYearPassengers = year.getValue();
+        }
     }
 }

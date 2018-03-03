@@ -33,11 +33,10 @@ public class PeriodsStatistics {
         });
         Collections.sort(summaryListChronologically, new Comparator<Map.Entry<LocalDate, Integer>>() {
             public int compare(Map.Entry<LocalDate, Integer> o1, Map.Entry<LocalDate, Integer> o2) {
-                return o2.getKey().compareTo(o1.getKey());
+                return o1.getKey().compareTo(o2.getKey());
             }
         });
     }
-
     public Map.Entry<LocalDate, Integer> getMin(){
         if (summaryListSortedByValue == null)
             prepareSummary();
@@ -50,23 +49,14 @@ public class PeriodsStatistics {
         return new AbstractMap.SimpleImmutableEntry<>(summaryListSortedByValue.get(summaryListSortedByValue.size() - 1).getKey(),
                 summaryListSortedByValue.get(summaryListSortedByValue.size() - 1).getValue());
     }
-    public Map.Entry<LocalDate, Integer> getFirst(){
+    public  List<Map.Entry<LocalDate, Integer>> getSummarySortedByValue(){
         if (summaryListSortedByValue == null)
             prepareSummary();
-        return new AbstractMap.SimpleImmutableEntry<>(summaryListChronologically.get(0).getKey(),
-                summaryListChronologically.get(0).getValue());
+        return summaryListSortedByValue;
     }
-    public Map.Entry<LocalDate, Integer> getLast(){
+    public  List<Map.Entry<LocalDate, Integer>> getSummaryChronologically(){
         if (summaryListSortedByValue == null)
             prepareSummary();
-        return new AbstractMap.SimpleImmutableEntry<>(summaryListChronologically.get(summaryListChronologically.size() - 1).getKey(),
-                summaryListChronologically.get(summaryListChronologically.size() - 1).getValue());
-    }
-    public String getSummary(String periodName){
-        prepareSummary();
-        return "Peak " + periodName + " : " + summaryListSortedByValue.get(0).getKey() +
-                " [" + summaryListSortedByValue.get(0).getValue() + " passengers], and worst " +
-                periodName + " : " + summaryListSortedByValue.get(summaryListSortedByValue.size() - 1).getKey() +
-                " [" + summaryListSortedByValue.get(summaryListSortedByValue.size() - 1).getValue() + " passengers]";
+        return summaryListChronologically;
     }
 }
