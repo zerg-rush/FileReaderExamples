@@ -55,7 +55,7 @@ public class Task4 {
             monthsCombined.getMax().getKey().getMonthValue(), monthsCombined.getMax().getValue(),
             monthsCombined.getMin().getKey().getMonthValue(), monthsCombined.getMin().getValue());
 
-        System.out.printf("3. Peak year : %d [%d passengers], worst year in the year : %d [%d passengers]\n",
+        System.out.printf("3. Peak year : %d [%d passengers], worst year : %d [%d passengers]\n",
                 years.getMax().getKey().getYear(), years.getMax().getValue(),
                 years.getMin().getKey().getYear(), years.getMin().getValue());
 
